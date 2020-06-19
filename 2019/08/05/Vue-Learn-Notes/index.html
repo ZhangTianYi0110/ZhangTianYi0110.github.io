@@ -1,0 +1,812 @@
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>Vue学习笔记 | tianyi blog</title><meta name="description" content="vue学习笔记"><meta name="keywords" content="前端,Vue"><meta name="author" content="zhangtianyi"><meta name="copyright" content="zhangtianyi"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.jpg"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="http://yoursite.com/2019/08/05/Vue-Learn-Notes/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Vue学习笔记"><meta name="twitter:description" content="vue学习笔记"><meta name="twitter:image" content="http://yoursite.com/img/avatar.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Vue学习笔记"><meta property="og:url" content="http://yoursite.com/2019/08/05/Vue-Learn-Notes/"><meta property="og:site_name" content="tianyi blog"><meta property="og:description" content="vue学习笔记"><meta property="og:image" content="http://yoursite.com/img/avatar.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="JavaScript学习笔记" href="http://yoursite.com/2019/08/06/JavaScript-Learn-Notes/"><link rel="next" title="如何使用jekyll+GitHub搭建个人博客(小白食用)" href="http://yoursite.com/2019/07/30/如何使用jekyll-GitHub搭建个人博客-小白食用/"><link rel="dns-prefetch" href="https://unpkg.com"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitment/style/default.min.css"><script src="https://cdn.jsdelivr.net/npm/gitment/dist/gitment.browser.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-144579929-1', 'auto');
+ga('send', 'pageview');
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: '添加书签',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天'
+
+  
+}</script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue安装"><span class="toc-number">1.</span> <span class="toc-text">Vue安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性"><span class="toc-number">1.1.</span> <span class="toc-text">兼容性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接用-lt-script-gt-引入"><span class="toc-number">1.2.</span> <span class="toc-text">直接用 ==&lt;script&gt;== 引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDN"><span class="toc-number">1.3.</span> <span class="toc-text">CDN</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue入门"><span class="toc-number">2.</span> <span class="toc-text">Vue入门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue组件"><span class="toc-number">3.</span> <span class="toc-text">Vue组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue全局组件"><span class="toc-number">3.1.</span> <span class="toc-text">Vue全局组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue局部组件"><span class="toc-number">3.2.</span> <span class="toc-text">Vue局部组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义局部组件"><span class="toc-number">3.2.1.</span> <span class="toc-text">定义局部组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用局部组件"><span class="toc-number">3.2.2.</span> <span class="toc-text">调用局部组件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue实例的生命周期"><span class="toc-number">4.</span> <span class="toc-text">Vue实例的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#生命周期图"><span class="toc-number">4.1.</span> <span class="toc-text">生命周期图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">4.2.</span> <span class="toc-text">测试代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再探究"><span class="toc-number">4.3.</span> <span class="toc-text">再探究</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#beforeCreate之前"><span class="toc-number">4.3.1.</span> <span class="toc-text">beforeCreate之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#beforeCreate和created钩子函数间的生命周期"><span class="toc-number">4.3.2.</span> <span class="toc-text">beforeCreate和created钩子函数间的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#created钩子函数和beforeMount间的生命周期"><span class="toc-number">4.3.3.</span> <span class="toc-text">created钩子函数和beforeMount间的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#el选项对生命周期影响"><span class="toc-number">4.3.3.1.</span> <span class="toc-text">el选项对生命周期影响</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#template"><span class="toc-number">4.3.3.2.</span> <span class="toc-text">template</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#beforeMount和mounted钩子函数间的生命周期"><span class="toc-number">4.3.4.</span> <span class="toc-text">beforeMount和mounted钩子函数间的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#beforeUpdate钩子函数和updated钩子函数间的生命周期"><span class="toc-number">4.3.5.</span> <span class="toc-text">beforeUpdate钩子函数和updated钩子函数间的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#beforeDestroy和destroyed钩子函数间的生命周期"><span class="toc-number">4.3.6.</span> <span class="toc-text">beforeDestroy和destroyed钩子函数间的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#beforeDestroy"><span class="toc-number">4.3.6.1.</span> <span class="toc-text">beforeDestroy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#destroyed"><span class="toc-number">4.3.6.2.</span> <span class="toc-text">destroyed</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue计算属性与侦听器"><span class="toc-number">5.</span> <span class="toc-text">Vue计算属性与侦听器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#computed的getter-setter"><span class="toc-number">5.1.</span> <span class="toc-text">computed的getter/setter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue组件详解"><span class="toc-number">6.</span> <span class="toc-text">Vue组件详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vue"><span class="toc-number">7.</span> <span class="toc-text">vue</span></a></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/post_img/post_img.jpg)"><div id="page-header"><span class="pull-left"> <a class="blog_title" id="site-name" href="/">tianyi blog</a></span><div class="open toggle-menu pull-right"><div class="menu-icon-first"></div><div class="menu-icon-second"></div><div class="menu-icon-third"></div></div><span class="pull-right menus"><div class="mobile_author_icon"><img class="lozad" data-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'"><div class="mobile_author-info__description">zhangtianyi blog</div></div><hr><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Vue学习笔记</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-08-05<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-08-06</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Vue/">Vue</a></span><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">6.2k</span><span class="post-meta__separator">|</span><span>阅读时长: 26 分钟</span><span class="post-meta__separator">|</span><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="Vue安装"><a href="#Vue安装" class="headerlink" title="Vue安装"></a>Vue安装</h1><p>Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。</p>
+<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p><strong>Vue 不支持 IE8 及以下版本，因为 Vue 使用了 IE8 无法模拟的 ECMAScript 5 特性。但它支持所有兼容 ECMAScript 5 的浏览器</strong>。</p>
+<h2 id="直接用-lt-script-gt-引入"><a href="#直接用-lt-script-gt-引入" class="headerlink" title="直接用 ==&lt;script&gt;== 引入"></a>直接用 ==&lt;script&gt;== 引入</h2><p>直接下载并用 ==&lt;script&gt;== 标签引入，==Vue== 会被注册为一个全局变量。<br><br><strong>在开发环境下不要使用压缩版本，不然你就失去了所有常见错误相关的警告!</strong></p>
+<ul>
+<li><a href="https://vuejs.org/js/vue.js" target="_blank" rel="noopener">开发版本</a>包含完整的警告和调试模式</li>
+<li><a href="https://vuejs.org/js/vue.min.js" target="_blank" rel="noopener">生产版本</a>删除了警告，33.30KB min+gzip<h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2>对于制作原型或学习，你可以这样使用最新版本：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>对于生产环境，我们推荐链接到一个明确的版本号和构建文件，以避免新版本造成的不可预期的破坏：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用原生 ES Modules，这里也有一个兼容 ES Module 的构建文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;module&quot;&gt;</span><br><span class="line">  import Vue from &apos;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.esm.browser.js&apos;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>你可以在 cdn.jsdelivr.net/npm/vue 浏览 NPM 包的源代码。</p>
+<p>Vue 也可以在 unpkg 和 cdnjs 上获取 (cdnjs 的版本更新可能略滞后)。</p>
+<p>请确认了解不同构建版本并在你发布的站点中使用生产环境版本，把 vue.js 换成 vue.min.js。这是一个更小的构建，可以带来比开发环境下更快的速度体验。</p>
+<hr>
+
+<h1 id="Vue入门"><a href="#Vue入门" class="headerlink" title="Vue入门"></a>Vue入门</h1><p>这里还是通过一个实例来了解Vue</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Vue入门实例&lt;/title&gt;
+    &lt;!-- &lt;script src=&quot;../vue.js&quot;&gt;&lt;/script&gt; --&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input type=&quot;text&quot; v-model=&quot;inputValue&quot;/&gt;
+        &lt;button @click=&quot;handlerClick&quot;&gt;提交&lt;/button&gt;
+        &lt;hr&gt;
+        &lt;ul&gt;
+            &lt;li v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot;&gt;{{item}}&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;hr&gt;
+        &lt;a :href=&quot;baidu&quot;&gt;百度&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+        el:&quot;#app&quot;,
+        data:{
+            list:[],
+            inputValue:&quot;&quot;,
+            baidu:&quot;http://www.baidu.com&quot;
+        },
+        methods: {
+            handlerClick:function(){
+                    if(!this.inputValue){
+                        alert(&quot;提交内容为空！&quot;);
+                        return;
+                    }
+                    this.list.push(this.inputValue);
+                    this.inputValue=&quot;&quot;;
+            }
+        }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><ol>
+<li>var app = new Vue({})创建一个实例，通过el:”#app”绑定到id为“app”的div内的所有内容。</li>
+<li>data:{}属性是用来装载数据的，预先定义好数据，例如list和inputValue，百度三个数据对象，即使没有值也需要定义空对象或者undefined，null，Vue是响应式，预先未定义的对象不会被Vue接管。</li>
+<li>methods:{}是用来定义方法，例如handlerClick方法</li>
+<li>指令<ul>
+<li>v-for指令用于遍历list</li>
+<li>v-model用于数据双向绑定，即input框中数据改变，Vue实例对应绑定的数据也发生改变，Vue实例数据被JS改变，input框也会改变。</li>
+<li>还有其他一些指令如v-if请自行查看<a href="https://cn.vuejs.org/v2/api/" target="_blank" rel="noopener">Vue官方文档</a></li>
+</ul>
+</li>
+<li>@click指令用于绑定事件，这里绑定了handlerClick事件，对应Vue实例methods中的handlerClick。(v-bind):baidu动态地绑定一个或多个特性，或一个组件 prop 到表达式，即将baidu绑定到上面<ul>
+<li>@是v-on:的缩写</li>
+<li>:是v-bind:的缩写</li>
+</ul>
+</li>
+<li>&#123;&#123;&#125;&#125;模板语法，如 &#123;&#123;item&#125;&#125;取出item的值</li>
+</ol>
+<hr>
+
+<h1 id="Vue组件"><a href="#Vue组件" class="headerlink" title="Vue组件"></a>Vue组件</h1><hr>
+<h2 id="Vue全局组件"><a href="#Vue全局组件" class="headerlink" title="Vue全局组件"></a>Vue全局组件</h2><p>老规矩来段代码测试，可以赋值代码测试一下哦！</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Vue全局组件&lt;/title&gt;
+
+    &lt;!-- 引入vue.js --&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input v-model=&quot;inputValue&quot;/&gt;
+        &lt;button @click=&quot;handlerClick&quot;&gt;提交&lt;/button&gt;
+        &lt;hr&gt;
+        &lt;ul&gt;
+            &lt;!-- 调用全局组件global,将全局组件global的content与item数据绑定，index与index绑定 --&gt;
+            &lt;global v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot; :index=&quot;index&quot; :content=&quot;item&quot; &gt;&lt;/global&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // 定义全局组件,每一个组件都是一个vue实例
+        Vue.component(&apos;global&apos;, {
+            props: [&apos;content&apos;,&apos;index&apos;],//组件属性
+            template:&apos;&lt;li&gt;{{content-index}}&lt;/li&gt;&apos;//模板获取content-index的值
+        });
+        var app = new Vue({
+            el:&quot;#app&quot;,
+            data:{
+                    list:[],
+                    inputValue:&quot;&quot;
+            },
+            methods: {
+                    handlerClick:function(){
+                            if(!this.inputValue){
+                                alert(&quot;输入为空&quot;)
+                                return;
+                            }
+                            this.list.push(this.inputValue);
+                            this.inputValue=&quot;&quot;;
+                    }
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>代码主要是测试全局组件调用:<br><strong>定义全局组件</strong></p>
+<pre><code>Vue.component(&apos;global&apos;, {
+            props: [&apos;content&apos;,&apos;index&apos;],//组件属性
+            template:&apos;&lt;li&gt;{{content-index}}&lt;/li&gt;&apos;
+        });</code></pre><p>此处global为组件名称，props为属性，template为模板，组件定义了两个属性分别为content，index，模板为一个<code>&lt;li&gt;</code>标签，计算content-index的值,可以在vue根实例(app)中调用，此处的全局组件也是一个vue实例，根实例(app)为父组件，global为子组件。</p>
+<ol>
+<li>global组件可以以<code>&lt;global&gt;</code>的方式在html中使用，如果你的组件名是GlobalCompontent这样的形势可以使用<code>&lt;global-compontent&gt;</code>，即大写可以转换为小写，第二个大写字母转小写后必须加上-前缀。</li>
+<li>:content和:index分别绑定item(list中每个元素的值)和index(当前的item的索引,即下标),<strong>:</strong> 等价于<strong>v-bind:</strong>。</li>
+<li>props用于向子组件(此处全局组件global)传递数据，content和index分别接收了:content的item、:index的index.</li>
+<li>template定义了模板(通常是一段HTML+Vue实例传过来的值，如content和index)<blockquote>
+<p>父组件(接管<code>&lt;div id=&#39;app&#39;&gt;</code>的Vue实例)向子组件(<code>&lt;global&gt;</code>)传递值,父组件中使用子组件。</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="Vue局部组件"><a href="#Vue局部组件" class="headerlink" title="Vue局部组件"></a>Vue局部组件</h2><p>将上面的代码改造使用局部组件</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Vue局部组件&lt;/title&gt;
+    &lt;!-- 引入vue.js --&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;input v-model=&quot;inputValue&quot;/&gt;
+        &lt;button @click=&quot;handlerClick&quot;&gt;提交&lt;/button&gt;
+        &lt;hr&gt;
+        &lt;ul&gt;
+            &lt;!-- 调用局部组件local,将局部组件local的content与item数据绑定，index与index绑定 --&gt;
+            &lt;local v-for=&quot;(item,index) in list&quot; :key=&quot;index&quot; :index=&quot;index&quot; :content=&quot;item&quot; @delete=&quot;handlerDelete&quot; &gt;&lt;/local&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        //局部组件
+        var local = {
+            props: [&apos;content&apos;,&apos;index&apos;],//组件属性
+            template:&apos;&lt;li @click=&quot;localHandlerClick&quot;&gt;{{content-index}}&lt;/li&gt;&apos;,//模板
+            methods:{
+                localHandlerClick:function(){
+                    //触发当前实例上的事件(delete)。附加参数(this.index)都会传给监听器回调。
+                    this.$emit(&apos;delete&apos;, this.index);
+                }
+            }
+        };
+        var app = new Vue({
+        el:&quot;#app&quot;,
+        components:{//调用局部组件，名为local，值为local对象
+            &apos;local&apos;:local
+        },
+        data:{
+                list:[],
+                inputValue:&quot;&quot;
+        },
+        methods: {
+                handlerClick:function(){
+                        if(!this.inputValue){
+                            alert(&quot;输入为空&quot;);
+                            return;
+                        }
+                        this.list.push(this.inputValue);
+                        this.inputValue=&quot;&quot;;
+                },
+                handlerDelete:function(index){
+                    this.list.splice(index, 1);//删除数组索引index开始，1个元素
+                }
+        }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>代码主要测试局部组件调用:</p>
+<h3 id="定义局部组件"><a href="#定义局部组件" class="headerlink" title="定义局部组件"></a>定义局部组件</h3><pre><code>var local = {
+    props: [&apos;content&apos;,&apos;index&apos;],//组件属性
+    template:&apos;&lt;li&gt;{{content-index}}&lt;/li&gt;&apos;,//模板
+    methods:{
+            localHandlerClick:function(){
+                //触发当前实例上的事件(delete)。附加参数(this.index)都会传给监听器回调。
+                this.$emit(&apos;delete&apos;, this.index);
+            }
+        }
+};</code></pre><h3 id="调用局部组件"><a href="#调用局部组件" class="headerlink" title="调用局部组件"></a>调用局部组件</h3><pre><code>components:{//调用局部组件，名为local，值为local对象
+    &apos;local&apos;:local
+},</code></pre><p>这里定义一个js对象local，在Vue实例中使用引用<code>components:{&#39;local&#39;:local}</code>引入该对象(local)，名称为<code>local</code>。</p>
+<ol>
+<li>局部组件local以<code>&lt;local&gt;</code>的方式使用</li>
+<li>在子组件local中定义了一个方法 <code>localHandlerClick</code>，点击子组件，触发方法，这里通过<code>this.$emit(&#39;delete&#39;, this.index)</code>向父组件传递一个事件，事件名为<code>delete</code>，该事件传递了一个参数<code>this.index</code>。</li>
+<li>父组件监听子组件的<code>@delete=&quot;handlerDelete&quot;</code>，子组件<code>delete</code>事件触发，传递到父组件触发<code>@delete</code>调用方法<code>handlerDelete</code>。这就是子组件向父组件传值。</li>
+<li><a href="https://cn.vuejs.org/v2/api/#vm-emit" target="_blank" rel="noopener">$emit</a>事件API</li>
+</ol>
+<hr>
+
+<h1 id="Vue实例的生命周期"><a href="#Vue实例的生命周期" class="headerlink" title="Vue实例的生命周期"></a>Vue实例的生命周期</h1><hr>
+<h2 id="生命周期图"><a href="#生命周期图" class="headerlink" title="生命周期图"></a>生命周期图</h2><p>Vue实例的生命周期中有多个状态。<br><img src="images/lifecycle.png" alt="生命周期图"></p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Vue实例的生命周期&lt;/title&gt;
+
+    &lt;!-- 引入vue.js --&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;h1&gt;测试生命周期&lt;/h1&gt;
+        &lt;div&gt;{{msg}}&lt;/div&gt;
+        &lt;hr&gt;
+        &lt;h3&gt;测试beforeUpdate和update两个钩子函数&lt;/h3&gt;
+        &lt;button @click=&quot;handlerUpdate&quot;&gt;更新数据&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el:&quot;#app&quot;,
+            data:{
+                msg:&quot;12345&quot;
+            },
+            methods: {
+                handlerUpdate:function(){
+                    this.msg=this.msg.split(&quot;&quot;).reverse().join(&quot;&quot;);
+                },
+            },//按照示意图依次调用
+            beforeCreate:function(){
+                console.log(&quot;调用了beforeCreate钩子函数&quot;);
+            },
+            created:function () {
+                console.log(&quot;调用了created钩子函数&quot;);
+            },
+            beforeMount: function () {
+                console.log(&apos;调用了beforeMount钩子函数&apos;)
+            },
+            mounted: function () {
+                console.log(&apos;调用了mounted钩子函数&apos;)
+            },
+            beforeUpdate: function () {
+                console.log(&quot;调用了beforeUpdate钩子函数&quot;)
+            },
+            updated: function () {
+                console.log(&quot;调用了updated钩子函数&quot;);
+            },
+            beforeDestroy: function () {
+                console.log(&quot;调用了beforeDestroy钩子函数&quot;)
+            },
+            destroyed: function () {
+                console.log(&quot;调用了destroyed钩子函数&quot;);
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><p>如图所示：<br><img src="images/1.png" alt="reslut"><br>初始化页面依次调用了：</p>
+<blockquote>
+<ol>
+<li>调用了beforeCreate钩子函数</li>
+<li>调用了created钩子函数</li>
+<li>调用了beforeMount钩子函数</li>
+<li>调用了mounted钩子函数</li>
+</ol>
+</blockquote>
+<p>点击更新数据后：<br><code>12345</code>变成了<code>54321</code>，此时调用了：</p>
+<blockquote>
+<ol>
+<li>调用了beforeUpdate钩子函数</li>
+<li>调用了updated钩子函数</li>
+</ol>
+</blockquote>
+<p>打开F12控制台<br>直接输入<code>app.$destroy()</code>主动销毁Vue实例调用：</p>
+<blockquote>
+<ol>
+<li>调用了beforeDestroy钩子函数</li>
+<li>调用了destroyed钩子函数</li>
+</ol>
+</blockquote>
+<h2 id="再探究"><a href="#再探究" class="headerlink" title="再探究"></a>再探究</h2><h3 id="beforeCreate之前"><a href="#beforeCreate之前" class="headerlink" title="beforeCreate之前"></a>beforeCreate之前</h3><p>初始化钩子函数和生命周期</p>
+<h3 id="beforeCreate和created钩子函数间的生命周期"><a href="#beforeCreate和created钩子函数间的生命周期" class="headerlink" title="beforeCreate和created钩子函数间的生命周期"></a>beforeCreate和created钩子函数间的生命周期</h3><p>在beforeCreate和created之间，进行数据观测(data observer) ，也就是在这个时候开始监控data中的数据变化了，同时初始化事件。<br><span style="float:right;"><a href="#1">生命周期展示图</a></span></p>
+<h3 id="created钩子函数和beforeMount间的生命周期"><a href="#created钩子函数和beforeMount间的生命周期" class="headerlink" title="created钩子函数和beforeMount间的生命周期"></a>created钩子函数和beforeMount间的生命周期</h3><p>对于created钩子函数和beforeMount有判断：<br><img src="images/2.png" alt="2"></p>
+<h4 id="el选项对生命周期影响"><a href="#el选项对生命周期影响" class="headerlink" title="el选项对生命周期影响"></a>el选项对生命周期影响</h4><blockquote>
+<ol>
+<li>有el选项</li>
+</ol>
+</blockquote>
+<pre><code>new Vue({
+    el: &apos;#app&apos;,
+    beforeCreate: function () {
+        console.log(&apos;调用了beforeCreat钩子函数&apos;)
+    },
+    created: function () {
+        console.log(&apos;调用了created钩子函数&apos;)
+    },
+    beforeMount: function () {
+        console.log(&apos;调用了beforeMount钩子函数&apos;)
+    },
+    mounted: function () {
+        console.log(&apos;调用了mounted钩子函数&apos;)
+    }
+})</code></pre><p>结果:<br><img src="images/3.png" alt="有el"></p>
+<blockquote>
+<ol start="2">
+<li>无el选项</li>
+</ol>
+</blockquote>
+<pre><code>new Vue({
+    beforeCreate: function () {
+        console.log(&apos;调用了beforeCreat钩子函数&apos;)
+    },
+    created: function () {
+        console.log(&apos;调用了created钩子函数&apos;)
+    },
+    beforeMount: function () {
+        console.log(&apos;调用了beforeMount钩子函数&apos;)
+    },
+    mounted: function () {
+        console.log(&apos;调用了mounted钩子函数&apos;)
+    }
+})</code></pre><p>结果：<br><img src="images/4.png" alt="无el"></p>
+<blockquote>
+<p>证明没有el选项，则停止编译，也意味着暂时停止了生命周期。生命周期到created钩子函数就结束了。而当我们不加el选项，但是手动执行vm.$mount(el)方法的话，也能够使暂停的生命周期进行下去，例如：</p>
+</blockquote>
+<pre><code>var app = new Vue({
+    beforeCreate: function () {
+        console.log(&apos;调用了beforeCreat钩子函数&apos;)
+    },
+    created: function () {
+        console.log(&apos;调用了created钩子函数&apos;)
+    },
+    beforeMount: function () {
+        console.log(&apos;调用了beforeMount钩子函数&apos;)
+    },
+    mounted: function () {
+        console.log(&apos;调用了mounted钩子函数&apos;)
+    }
+})
+app.$mount(&apos;#app&apos;)</code></pre><p>结果：<br><img src="images/3.png" alt="有el"></p>
+<h4 id="template"><a href="#template" class="headerlink" title="template"></a>template</h4><p><img src="images/5.png" alt="template"></p>
+<blockquote>
+<p>同时使用<code>template</code>和<code>HTML</code>，查看优先级：</p>
+</blockquote>
+<pre><code>&lt;h1&gt;测试template和HTML的优先级&lt;/h1&gt;
+&lt;div id=&quot;app&quot;&gt;
+    &lt;p&gt;HTML优先&lt;/p&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var app = new Vue({
+        el:&quot;#app&quot;,
+        data:{
+            msg:&quot;template优先&quot;
+        },
+        template:&quot;&lt;p&gt;{{msg}}&lt;/p&gt;&quot;,
+    });
+&lt;/script&gt;</code></pre><p>结果：<br><img src="images/6.png" alt="template"></p>
+<blockquote>
+<p>结论</p>
+<ol>
+<li>如果Vue实例对象中有template参数选项，则将其作为模板编译成render函数</li>
+<li>如果没有template参数选项，则将外部的HTML作为模板编译（template），也就是说，template参数选项的优先级要比外部的HTML高</li>
+<li>如果1,2条件都不具备，则报错</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>注意</p>
+<ol>
+<li>Vue需要通过el去找对应的template，Vue实例通过el的参数，首先找自己有没有template，如果没有再去找外部的html，找到后将其编译成render函数。</li>
+<li>也可以直接调用<a href="https://cn.vuejs.org/v2/api/#render" target="_blank" rel="noopener">render</a>选项，优先级：<code>render函数选项  &gt; template参数  &gt; 外部HTML</code>。</li>
+</ol>
+</blockquote>
+<hr>
+
+<pre><code>new Vue({
+    el: &apos;#app&apos;,
+    render (createElement) {
+        return (....)
+    }
+})</code></pre><h3 id="beforeMount和mounted钩子函数间的生命周期"><a href="#beforeMount和mounted钩子函数间的生命周期" class="headerlink" title="beforeMount和mounted钩子函数间的生命周期"></a>beforeMount和mounted钩子函数间的生命周期</h3><p><img src="images/7.png" alt="7"></p>
+<blockquote>
+<p>beforeMount</p>
+</blockquote>
+<p>载入前（完成了data和el数据初始化），但是页面中的内容还是vue中的占位符，data中的message信息没有被挂在到Bom节点中，在这里可以在渲染前最后一次更改数据的机会，不会触发其他的钩子函数，一般可以在这里做初始数据的获取。</p>
+<blockquote>
+<p>Mount</p>
+</blockquote>
+<p>载入后html已经渲染(ajax请求可以放在这个函数中)，把vue实例中的data里的message挂载到BOM节点中去</p>
+<blockquote>
+<p>这里两个钩子函数间是载入数据。</p>
+</blockquote>
+<h3 id="beforeUpdate钩子函数和updated钩子函数间的生命周期"><a href="#beforeUpdate钩子函数和updated钩子函数间的生命周期" class="headerlink" title="beforeUpdate钩子函数和updated钩子函数间的生命周期"></a>beforeUpdate钩子函数和updated钩子函数间的生命周期</h3><p><img src="images/8.png" alt="8"><br>在Vue中，修改数据会导致重新渲染，依次调用beforeUpdate钩子函数和updated钩子函数</p>
+<p>如果待修改的数据没有载入模板中，不会调用这里两个钩子函数</p>
+<pre><code>var app = new Vue({
+    el: &apos;#app&apos;,
+    data: {
+        msg: 1
+    },
+    template: &apos;&lt;div id=&quot;app&quot;&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;&apos;,
+    beforeUpdate: function () {
+        console.log(&apos;调用了beforeUpdate钩子函数&apos;)
+    },
+    updated: function () {
+        console.log(&apos;调用了updated钩子函数&apos;)
+    }
+})
+app.msg = 2</code></pre><p>结果：<br><img src="images/9.png" alt="9"><br>如果绑定了数据，会调用两个钩子函数：</p>
+<pre><code>&lt;h1&gt;测试有数据绑定修改数据，钩子函数调用情况&lt;/h1&gt;
+&lt;div id=&quot;app&quot;&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var app = new Vue({
+        el:&quot;#app&quot;,
+        template:&quot;&lt;p&gt;{{msg}}&lt;/p&gt;&quot;,
+        data:{
+            msg:&quot;原数据&quot;
+        },
+        beforeUpdate: function () {
+            console.log(&quot;调用了beforeUpdate钩子函数&quot;)
+        },
+        updated: function () {
+            console.log(&quot;调用了updated钩子函数&quot;);
+        },
+    });
+    app.msg = &quot;数据被修改了&quot;;
+&lt;/script&gt;</code></pre><p>结果：<br><img src="images/10.png" alt="10"></p>
+<blockquote>
+<p>注意只有写入模板的数据才会被追踪</p>
+</blockquote>
+<h3 id="beforeDestroy和destroyed钩子函数间的生命周期"><a href="#beforeDestroy和destroyed钩子函数间的生命周期" class="headerlink" title="beforeDestroy和destroyed钩子函数间的生命周期"></a>beforeDestroy和destroyed钩子函数间的生命周期</h3><p><img src="images/11.png" alt="11"></p>
+<h4 id="beforeDestroy"><a href="#beforeDestroy" class="headerlink" title="beforeDestroy"></a>beforeDestroy</h4><p>销毁前执行（$destroy方法被调用的时候就会执行）,一般在这里善后:清除计时器、清除非指令绑定的事件等等…’)</p>
+<h4 id="destroyed"><a href="#destroyed" class="headerlink" title="destroyed"></a>destroyed</h4><p>销毁后 （Dom元素存在，只是不再受vue控制）,卸载watcher，事件监听，子组件</p>
+<blockquote>
+<p>总结</p>
+<ul>
+<li>beforecreate : 可以在这加个loading事件</li>
+<li>created ：在这结束loading，还做一些初始数据的获取，实现函数自-执行</li>
+<li>mounted ： 在这发起后端请求，拿回数据，配合路由钩子做一些事情</li>
+<li>beforeDestroy： 你确认删除XX吗？</li>
+<li>destroyed ：当前组件已被删除，清空相关内容</li>
+</ul>
+</blockquote>
+<hr>
+
+<h1 id="Vue计算属性与侦听器"><a href="#Vue计算属性与侦听器" class="headerlink" title="Vue计算属性与侦听器"></a>Vue计算属性与侦听器</h1><blockquote>
+<p>照例看一段代码：</p>
+</blockquote>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Vue计算属性/侦听器/方法比较&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;h1&gt;计算属性：computed&lt;/h1&gt;
+        {{fullName}}
+        &lt;h1&gt;方法：methods&lt;/h1&gt;
+        {{fullName2()}}
+        &lt;h1&gt;侦听器：watch&lt;/h1&gt;
+        {{watchFullName}}
+        &lt;h1&gt;年龄&lt;/h1&gt;
+        {{age}}
+    &lt;/div&gt;
+    &lt;script&gt;
+        var other = &apos;This is other&apos;;
+        var app = new Vue({
+            el:&quot;#app&quot;,
+            data:{
+            firstName:&quot;zhang&quot;,
+            lastName:&quot;san&quot;,
+            watchFullName:&quot;zhangsan&quot;,
+            age:18,
+            },
+            watch: {
+                firstName:function(newFirstName, oldFirstName){
+                    console.log(&quot;firstName触发了watch,newFirstName=&quot;+newFirstName+&quot;,oldFirstName=&quot;+oldFirstName)
+                    this.watchFullName = this.firstName+this.lastName+&quot;,&quot;+other
+                },
+                lastName:function(newLastName, oldLastName){
+                    console.log(&quot;lastName触发了watch,newLastName=&quot;+newLastName+&quot;,oldLastName=&quot;+oldLastName)
+                    this.watchFullName = this.firstName+this.lastName+&quot;,&quot;+other
+                }
+            },
+            computed: {
+                fullName:function(){
+                console.log(&quot;调用了fullName,计算了一次属性&quot;)
+                return this.firstName+this.lastName+&quot;,&quot;+other;
+                }
+            },
+            methods: {
+                fullName2:function(){
+                    console.log(&quot;调用了fullName,执行了一次方法&quot;)
+                    fullName2 = this.firstName+this.lastName+&quot;,&quot;+other;
+                    return fullName2;
+                }
+            }
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><ul>
+<li>初始化：<br><img src="images/12.png" alt="12"></li>
+<li>修改firstName/lastName/两者都修改<br><img src="images/13.png" alt="13"></li>
+<li>修改computed中没计算的age<br><img src="images/14.png" alt="14"></li>
+<li>修改Vue实例外的对象<br><img src="images/15.png" alt="15"></li>
+<li>修改Vue实例外对象后在修改Vue实例内的对象<br><img src="images/16.png" alt="16"></li>
+<li>测试结论：<ol>
+<li>使用computed计算了fullName属性，值为firstName+lastName。计算属性具有<code>缓存功能</code>，当firstName和lastName都不改变的时候，fullName不会重新计算，比如我们改变age的值，fullName的值是不需要重新计算的.</li>
+<li>methods并没有缓存特性，比如我们改变age的值，fullName2()方法会被执行一遍</li>
+<li>当一个功能可以用上面三个方法来实现的时候，明显使用computed更合适，代码简单也有缓存特性。</li>
+<li>计算属性范围在vue实例内，修改vue实例外部对象，不会重新计算渲染，但是如果先修改了vue实例外对象，在修改vue计算属性的对象，那么外部对象的值也会重新渲染。<blockquote>
+<p>计算属性：computed</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<p>计算属性范围在Vue实例的fullName内所管理的firstName和lastName,通常监听多个变量</p>
+<blockquote>
+<p>侦听器：watch</p>
+</blockquote>
+<p>监听数据变化，一般只监听一个变量或数组</p>
+<blockquote>
+<p>使用场景</p>
+</blockquote>
+<p>watch(<code>异步场景</code>)，computed(<code>数据联动</code>)</p>
+<h2 id="computed的getter-setter"><a href="#computed的getter-setter" class="headerlink" title="computed的getter/setter"></a>computed的getter/setter</h2><p>请看如下代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;Vue计算属性的getter和setter&lt;/title&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;h1&gt;计算属性：computed的getter/setter&lt;/h1&gt;
+        &lt;h2&gt;fullName&lt;/h2&gt;
+        {{fullName}}
+        &lt;h2&gt;firstName&lt;/h2&gt;
+        {{firstName}}
+        &lt;h2&gt;lastName&lt;/h2&gt;
+        {{lastName}}
+    &lt;/div&gt;
+    &lt;script&gt;
+        var app = new Vue({
+            el:&quot;#app&quot;,
+            data:{
+            firstName:&quot;zhang&quot;,
+            lastName:&quot;san&quot;,
+            },
+            computed: {
+                fullName:{
+                    get:function(){
+                        return this.firstName+&quot; &quot;+this.lastName
+                    },
+                    set:function(value){
+                        var list = value.split(&apos; &apos;);
+                        this.firstName=list[0]
+                        this.lastName=list[1]
+                    }
+                }
+            },
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre><blockquote>
+<p>初始化</p>
+</blockquote>
+<p><img src="images/17.png" alt="17"></p>
+<blockquote>
+<p>修改fullName</p>
+</blockquote>
+<p><img src="images/18.png" alt="18"></p>
+<blockquote>
+<p>结论</p>
+</blockquote>
+<ul>
+<li>通过这种方式，我们可以在改变计算属性值的同时也改变和计算属性相关联的属性值。</li>
+</ul>
+<hr>
+<h1 id="Vue组件详解"><a href="#Vue组件详解" class="headerlink" title="Vue组件详解"></a>Vue组件详解</h1><blockquote>
+<p>组件复用</p>
+</blockquote>
+<pre><code>&lt;div id=&quot;components-demo&quot;&gt;
+    &lt;button-counter&gt;&lt;/button-counter&gt;
+    &lt;button-counter&gt;&lt;/button-counter&gt;
+    &lt;button-counter&gt;&lt;/button-counter&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    // 定义一个名为 button-counter 的新组件
+    Vue.component(&apos;button-counter&apos;, {
+    data: function () {
+        return {
+        count: 0
+        }
+    },
+    template: &apos;&lt;button v-on:click=&quot;count++&quot;&gt;You clicked me {{ count }} times.&lt;/button&gt;&apos;
+    })
+    new Vue({ el: &apos;#components-demo&apos; })
+&lt;/script&gt;</code></pre><p>组件是可复用的 Vue 实例，且带有一个名字：在这个例子中是 <code>&lt;button-counter&gt;</code>。我们可以在一个通过 new Vue 创建的 Vue 根实例中，把这个组件作为自定义元素来使用。<br><strong>测试代码</strong></p>
+<pre><code>&lt;!-- 引入vue.js --&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;app&quot;&gt;
+    &lt;button-counter&gt;&lt;/button-counter&gt;
+    &lt;button-counter&gt;&lt;/button-counter&gt;
+    &lt;button-counter&gt;&lt;/button-counter&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    // 定义一个名为 button-counter 的新组件
+    Vue.component(&apos;button-counter&apos;, {
+    data: function () {
+        return {
+        count: 0
+        }
+    },
+    template: &apos;&lt;button v-on:click=&quot;count++&quot;&gt;You clicked me {{ count }} times.&lt;/button&gt;&apos;
+    })
+    new Vue({ el: &apos;#app&apos; })
+&lt;/script&gt;</code></pre><blockquote>
+<p>data必须是一个函数</p>
+</blockquote>
+<pre><code>data: {
+    count: 0
+}</code></pre><p>不然服用时候改变一个数，所有组件的数值都会改变</p>
+<pre><code>data: function () {
+    return {
+        count: 0
+    }
+}</code></pre><p>取而代之的是，一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝。<br>如果 Vue 没有这条规则，点击一个按钮就可能会像如下代码一样影响到其它所有实例。</p>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<ol>
+<li><p>data属性一定为function</p>
+<pre><code>&lt;script&gt;
+    Vue.component(&apos;row&apos;, {
+        data: function(){
+            return {
+                content: &apos;hello world.&apos;
+            }
+        },
+        template: &apos;&lt;tr&gt;&lt;td&gt;{{content}}&lt;/td&gt;&lt;/tr&gt;&apos;
+    });
+    var app = new Vue({
+        el: &quot;#app&quot;
+    });
+&lt;/script&gt;</code></pre><blockquote>
+<p>复用时候作用域互不影响</p>
+</blockquote>
+</li>
+<li><p>使用ref操作Dom元素</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+    &lt;div ref=&quot;point&quot; @click=&quot;hello&quot;&gt;hello world&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+    var app = new Vue({
+        el: &quot;#app&quot;,
+        methods: {
+            hello : function(){
+                alert(this.$refs.point.innerHTML);
+            }
+        }
+    });
+&lt;/script&gt;</code></pre><blockquote>
+<p>使用ref让div变成一个引用，名称为point，然后在hello()方法中，this.$refs表示当前Vue实例中的所有引用，this.$refs.point这里获取的是<div ref="point">这个DOM对象。</div></p>
+</blockquote>
+</li>
+<li><p>Props<br>以字符串数组形式列出的 prop：</p>
+<blockquote>
+<p>props: [‘title’, ‘likes’, ‘isPublished’, ‘commentIds’, ‘author’]</p>
+</blockquote>
+</li>
+</ol>
+<p>但是，通常你希望每个 prop 都有指定的值类型。这时，你可以以对象形式列出 prop，这些属性的名称和值分别是 prop 各自的名称和类型：</p>
+<blockquote>
+<p>props: {<br>  title: String,<br>  likes: Number,<br>  isPublished: Boolean,<br>  commentIds: Array,<br>  author: Object,<br>  callback: Function,<br>  contactsPromise: Promise // or any other constructor<br>}</p>
+</blockquote>
+<blockquote>
+<p>传递静态或动态 Prop</p>
+</blockquote>
+<p>像这样，你已经知道了可以像这样给 prop 传入一个静态的值：</p>
+<pre><code>&lt;blog-post title=&quot;My journey with Vue&quot;&gt;&lt;/blog-post&gt;</code></pre><p>你也知道 prop 可以通过 v-bind 动态赋值，例如：</p>
+<pre><code>&lt;!-- 动态赋予一个变量的值 --&gt;
+&lt;blog-post v-bind:title=&quot;post.title&quot;&gt;&lt;/blog-post&gt;
+
+&lt;!-- 动态赋予一个复杂表达式的值 --&gt;
+&lt;blog-post
+v-bind:title=&quot;post.title + &apos; by &apos; + post.author.name&quot;
+&gt;&lt;/blog-post&gt;</code></pre><p>在上述两个示例中，我们传入的值都是字符串类型的，但实际上任何类型的值都可以传给一个 prop。</p>
+<ul>
+<li><p>传入一个数字</p>
+<pre><code>&lt;!-- 即便 `42` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue --&gt;
+&lt;!-- 这是一个 JavaScript 表达式而不是一个字符串。--&gt;
+&lt;blog-post v-bind:likes=&quot;42&quot;&gt;&lt;/blog-post&gt;
+
+&lt;!-- 用一个变量进行动态赋值。--&gt;
+&lt;blog-post v-bind:likes=&quot;post.likes&quot;&gt;&lt;/blog-post&gt;</code></pre></li>
+<li><p>传入一个布尔值</p>
+<pre><code>&lt;!-- 包含该 prop 没有值的情况在内，都意味着 `true`。--&gt;
+&lt;blog-post is-published&gt;&lt;/blog-post&gt;
+
+&lt;!-- 即便 `false` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue --&gt;
+&lt;!-- 这是一个 JavaScript 表达式而不是一个字符串。--&gt;
+&lt;blog-post v-bind:is-published=&quot;false&quot;&gt;&lt;/blog-post&gt;
+
+&lt;!-- 用一个变量进行动态赋值。--&gt;
+&lt;blog-post v-bind:is-published=&quot;post.isPublished&quot;&gt;&lt;/blog-post&gt;</code></pre></li>
+<li><p>传入一个数组</p>
+<pre><code>&lt;!-- 即便数组是静态的，我们仍然需要 `v-bind` 来告诉 Vue --&gt;
+&lt;!-- 这是一个 JavaScript 表达式而不是一个字符串。--&gt;
+&lt;blog-post v-bind:comment-ids=&quot;[234, 266, 273]&quot;&gt;&lt;/blog-post&gt;
+
+&lt;!-- 用一个变量进行动态赋值。--&gt;
+&lt;blog-post v-bind:comment-ids=&quot;post.commentIds&quot;&gt;&lt;/blog-post&gt;</code></pre></li>
+<li><p>传入一个对象</p>
+<pre><code>&lt;!-- 即便对象是静态的，我们仍然需要 `v-bind` 来告诉 Vue --&gt;
+&lt;!-- 这是一个 JavaScript 表达式而不是一个字符串。--&gt;
+&lt;blog-post
+v-bind:author=&quot;{
+    name: &apos;Veronica&apos;,
+    company: &apos;Veridian Dynamics&apos;
+}&quot;
+&gt;&lt;/blog-post&gt;
+
+&lt;!-- 用一个变量进行动态赋值。--&gt;
+&lt;blog-post v-bind:author=&quot;post.author&quot;&gt;&lt;/blog-post&gt;</code></pre></li>
+<li><p>传入一个对象的所有属性<br>如果你想要将一个对象的所有属性都作为 prop 传入，你可以使用不带参数的 v-bind (取代 v-bind:prop-name)。例如，对于一个给定的对象 post：</p>
+<pre><code>post: {
+id: 1,
+title: &apos;My Journey with Vue&apos;
+}</code></pre><p>下面的模板：</p>
+<pre><code>&lt;blog-post v-bind=&quot;post&quot;&gt;&lt;/blog-post&gt;</code></pre><p>等价于：</p>
+<pre><code>&lt;blog-post
+v-bind:id=&quot;post.id&quot;
+v-bind:title=&quot;post.title&quot;
+&gt;&lt;/blog-post&gt;</code></pre></li>
+</ul>
+<h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">zhangtianyi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/08/05/Vue-Learn-Notes/">http://yoursite.com/2019/08/05/Vue-Learn-Notes/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">tianyi blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/前端/">前端    </a><a class="post-meta__tags" href="/tags/Vue/">Vue    </a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-buttom"><i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" data-src="/img/wechat.jpg"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lozad post-qr-code__img" data-src="/img/alipay.jpg"><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/2019/08/06/JavaScript-Learn-Notes/"><img class="prev_cover lozad" data-src="/img/default_cover/default_bg9.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>JavaScript学习笔记</span></div></a></div><div class="next-post pull-right"><a href="/2019/07/30/如何使用jekyll-GitHub搭建个人博客-小白食用/"><img class="next_cover lozad" data-src="/img/default_cover/default_bg2.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>如何使用jekyll+GitHub搭建个人博客(小白食用)</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span>Recommend</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2019/08/06/JavaScript-Learn-Notes/" title="JavaScript学习笔记"><img class="relatedPosts_cover lozad" data-src="/img/default_cover/default_bg5.jpg"><div class="relatedPosts_title">JavaScript学习笔记</div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span>评论</span></div><div id="gitment-container"></div><script>var gitment = new Gitment({
+  id: md5(decodeURI(location.pathname)),
+  owner: 'zhangtianyi0110',
+  repo: 'zhangtianyi0110.github.io',
+  oauth: {
+    client_id: '41b77495dc004cefa0cf',
+    client_secret: 'a6ceec436cacc953885ab8fa5b344a2b3052cd3a'
+  }
+})
+gitment.render('gitment-container')</script></div></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2020 By zhangtianyi</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://zhangtianyi0110.github.io">blog</a>!</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><section class="rightside" id="rightside"><i class="fa fa-book" id="readmode" title="阅读模式"> </i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换">繁</a><i class="fa fa-moon-o nightshift" id="nightshift" title="夜间模式"></i></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zindex="-1" data-click="false"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/activate-power-mode.js"></script><script>POWERMODE.colorful = true; // make power mode colorful
+POWERMODE.shake = true; // turn off shake
+document.body.addEventListener('input', POWERMODE);
+</script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script></body></html>
